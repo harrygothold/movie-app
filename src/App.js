@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import Movies from "./containers/Movies/";
+import { faStar as farFaStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar as fasFaStar } from "@fortawesome/free-solid-svg-icons";
+import ToolBar from "./containers/Toolbar";
 
-function App() {
+const App = () => {
+  library.add(farFaStar, fasFaStar);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ToolBar />
+      <Movies />
     </div>
   );
-}
+};
 
 export default App;
