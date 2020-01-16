@@ -43,7 +43,6 @@ const ToolBar = ({ getAllGenres, genres, selectedFilter, removeFilter }) => {
   useEffect(() => {
     getAllGenres();
   }, []);
-  console.log(selectedFilter);
   return (
     <ToolbarWrapper>
       <Filter genres={genres} />

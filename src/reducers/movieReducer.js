@@ -9,7 +9,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(state.selectedFilter);
   switch (action.type) {
     case TYPES.GET_TRENDING:
       return {
@@ -42,19 +41,28 @@ export default (state = INITIAL_STATE, action) => {
         movies: state.movies
       };
     case TYPES.REMOVE_FILTER:
-      let newMovies;
-      const toRemove = state.selectedFilter.length - 1;
-      if (state.selectedFilter.length > 1) {
-        newMovies = state.movies.filter(
-          movie => !movie.genre_ids.includes(state.selectedFilter[toRemove].id)
-        );
-      } else {
-        newMovies = state.allMovies;
-      }
+      const remainingFilters = state.selectedFilter.filter(
+        filter => filter.id !== action.payload.id
+      );
+      let newMovies = [];
+      state.allMovies.map(movie => {
+        if (state.selectedFilter.length === 1) {
+          newMovies = [...state.allMovies];
+        } else {
+          remainingFilters.map(rf => {
+            const index = movie.genre_ids.indexOf(rf.id);
+            if (index !== -1) {
+              newMovies.push(movie);
+            }
+            return newMovies;
+          });
+        }
+        return newMovies;
+      });
       return {
         ...state,
         selectedFilter: state.selectedFilter.filter(
-          selected => selected !== action.payload
+          selected => selected.id !== action.payload.id
         ),
         movies: newMovies
       };
