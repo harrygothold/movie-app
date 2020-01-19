@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   movies: [],
   genres: [],
   selectedFilter: [],
-  allMovies: []
+  allMovies: [],
+  showSearch: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -82,6 +83,16 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         movies: [...backwardsMovies]
+      };
+    case TYPES.SHOW_SEARCH:
+      return {
+        ...state,
+        showSearch: action.payload
+      };
+    case TYPES.SEARCH_MOVIES:
+      return {
+        ...state,
+        movies: action.payload
       };
     default: {
       return state;

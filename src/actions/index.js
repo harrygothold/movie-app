@@ -63,3 +63,23 @@ export const sortZA = () => dispatch => {
     type: Types.SORT_ZA
   });
 };
+
+export const toggleSearch = bool => dispatch => {
+  dispatch({
+    type: Types.SHOW_SEARCH,
+    payload: bool
+  });
+};
+
+export const searchMovies = searchTerm => async dispatch => {
+  const res = await axios.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE_DB_API_KEY}&query=${searchTerm}`
+  );
+  if (res.data) {
+    console.log(res.data);
+  }
+  dispatch({
+    type: Types.SEARCH_MOVIES,
+    payload: res.data.results
+  });
+};

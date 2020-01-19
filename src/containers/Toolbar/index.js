@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAllGenres, removeFilter } from "../../actions/index";
+import { getAllGenres, removeFilter, toggleSearch } from "../../actions/index";
 import styled from "styled-components";
 import Filter from "../Filter";
 import { connect } from "react-redux";
+import SearchButton from "../../components/SearchButton";
+import SearchBar from "../../components/SearchBar";
 
 const ToolbarWrapper = styled.div`
   height: 100px;
@@ -38,7 +40,14 @@ const RemoveFilterBtn = styled.span`
   right: 5px;
 `;
 
-const ToolBar = ({ getAllGenres, genres, selectedFilter, removeFilter }) => {
+const ToolBar = ({
+  getAllGenres,
+  genres,
+  selectedFilter,
+  removeFilter,
+  toggleSearch,
+  showSearch
+}) => {
   const [filterHover, setFilterHover] = useState(false);
   useEffect(() => {
     getAllGenres();
@@ -46,6 +55,7 @@ const ToolBar = ({ getAllGenres, genres, selectedFilter, removeFilter }) => {
   return (
     <ToolbarWrapper>
       <Filter genres={genres} />
+      <SearchBar showSearch={showSearch} />
       <SelectedFilterContainer
         onMouseEnter={() => setFilterHover(true)}
         onMouseLeave={() => setFilterHover(false)}
@@ -62,15 +72,19 @@ const ToolBar = ({ getAllGenres, genres, selectedFilter, removeFilter }) => {
             </FilterItem>
           ))}
       </SelectedFilterContainer>
+      <SearchButton showSearch={showSearch} toggleSearch={toggleSearch} />
     </ToolbarWrapper>
   );
 };
 
 const mapStateToProps = state => ({
   genres: state.movies.genres,
-  selectedFilter: state.movies.selectedFilter
+  selectedFilter: state.movies.selectedFilter,
+  showSearch: state.movies.showSearch
 });
 
-export default connect(mapStateToProps, { getAllGenres, removeFilter })(
-  ToolBar
-);
+export default connect(mapStateToProps, {
+  getAllGenres,
+  removeFilter,
+  toggleSearch
+})(ToolBar);

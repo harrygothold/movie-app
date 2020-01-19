@@ -6,3 +6,7 @@ export const REMOVE_FILTER = "REMOVE_FILTER";
 
 export const SORT_AZ = "SORT_AZ";
 export const SORT_ZA = "SORT_ZA";
+
+export const SHOW_SEARCH = "SHOW_SEARCH";
+
+export const SEARCH_MOVIES = "SEARCH_MOVIES";

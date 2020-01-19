@@ -13,9 +13,10 @@ const MovieItemWrapper = styled.div`
   align-items: center;
   margin: 20px;
   height: 550px;
+  cursor: pointer;
   transition: all 0.7s;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(${({ showSearch }) => (showSearch ? 1 : 1.1)});
   }
 `;
 
@@ -49,9 +50,9 @@ const MovieItemDate = styled.p`
   margin-bottom: 20px;
 `;
 
-const MovieItem = ({ movie }) => {
+const MovieItem = ({ movie, showSearch }) => {
   return (
-    <MovieItemWrapper>
+    <MovieItemWrapper showSearch={showSearch}>
       <MovieItemImageWrapper>
         <MovieItemImage
           src={`${process.env.REACT_APP_SECURE_FILM_URL}/${movie.poster_path}`}
