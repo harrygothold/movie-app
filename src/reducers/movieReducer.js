@@ -1,4 +1,5 @@
 import * as TYPES from "../actions/types";
+import { sortAlphabetically } from "../utils/sortAlphabetically";
 
 const INITIAL_STATE = {
   loading: true,
@@ -65,6 +66,22 @@ export default (state = INITIAL_STATE, action) => {
           selected => selected.id !== action.payload.id
         ),
         movies: newMovies
+      };
+    case TYPES.SORT_AZ:
+      const sortedMovies = state.movies.sort(
+        sortAlphabetically("title", "asc")
+      );
+      return {
+        ...state,
+        movies: [...sortedMovies]
+      };
+    case TYPES.SORT_ZA:
+      const backwardsMovies = state.movies.sort(
+        sortAlphabetically("title", "desc")
+      );
+      return {
+        ...state,
+        movies: [...backwardsMovies]
       };
     default: {
       return state;

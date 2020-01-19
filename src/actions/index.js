@@ -51,3 +51,15 @@ export const removeFilter = name => dispatch => {
     payload: name
   });
 };
+
+export const sortAZ = () => dispatch => {
+  dispatch({
+    type: Types.SORT_AZ
+  });
+};
+
+export const sortZA = () => dispatch => {
+  dispatch({
+    type: Types.SORT_ZA
+  });
+};

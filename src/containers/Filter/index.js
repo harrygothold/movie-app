@@ -3,7 +3,7 @@ import FilterButton from "../../components/FilterButton";
 import styled from "styled-components";
 import FilterTab from "../../components/FilterTab";
 import { connect } from "react-redux";
-import { filterMovies } from "../../actions/";
+import { filterMovies, sortAZ, sortZA } from "../../actions/";
 
 const FilterContainer = styled.div`
   display: flex;
@@ -39,13 +39,23 @@ const FilterListContainer = styled.div`
   overflow-y: scroll;
 `;
 
-const Filter = ({ genres, filterMovies }) => {
+const Filter = ({ genres, filterMovies, sortAZ, sortZA }) => {
   const [filterToggle, setFilterToggle] = useState(false);
   const [openFilters, setOpenFilters] = useState(false);
   const [openSort, setOpenSort] = useState(false);
 
   const handleFilterClick = (value, name) => {
     filterMovies(value, name);
+    setFilterToggle(false);
+  };
+
+  const handleAZClick = () => {
+    sortAZ();
+    setFilterToggle(false);
+  };
+
+  const handleZAClick = () => {
+    sortZA();
     setFilterToggle(false);
   };
 
@@ -83,8 +93,12 @@ const Filter = ({ genres, filterMovies }) => {
           {openSort && (
             <FilterListContainer>
               <ul>
-                <FilterListItem>Sort A-Z</FilterListItem>
-                <FilterListItem>Sort Z-A</FilterListItem>
+                <FilterListItem onClick={() => handleAZClick()}>
+                  Sort A-Z
+                </FilterListItem>
+                <FilterListItem onClick={() => handleZAClick()}>
+                  Sort Z-A
+                </FilterListItem>
               </ul>
             </FilterListContainer>
           )}
@@ -94,4 +108,4 @@ const Filter = ({ genres, filterMovies }) => {
   );
 };
 
-export default connect(null, { filterMovies })(Filter);
+export default connect(null, { filterMovies, sortAZ, sortZA })(Filter);
