@@ -3,7 +3,9 @@ import ReactDom from "react-dom";
 import { Provider } from "react-redux";
 import { createGlobalStyle } from "styled-components";
 import App from "./App";
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import store from "./store";
+import MoviePage from "./containers/MoviePage";
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -16,10 +18,19 @@ html {
 }
 `;
 
+const Root = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path='/' component={App} />
+      <Route path='/movie/:id' component={MoviePage} />
+    </Switch>
+  </BrowserRouter>
+)
+
 ReactDom.render(
   <Provider store={store}>
     <GlobalStyles />
-    <App />
+    <Root />
   </Provider>,
   document.getElementById("root")
 );

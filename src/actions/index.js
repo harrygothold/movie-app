@@ -83,3 +83,11 @@ export const searchMovies = searchTerm => async dispatch => {
     payload: res.data.results
   });
 };
+
+export const getMovieById = id => async dispatch => {
+  const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_MOVIE_DB_API_KEY}`)
+  dispatch({
+    type: Types.GET_MOVIE_BY_ID,
+    payload: res.data,
+  })
+}

@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import Rating from "../Rating";
 
-const MovieItemWrapper = styled.div`
+const MovieItemWrapper = styled(Link)`
   box-shadow: 0rem 2rem 5rem rgba(0, 0, 0, 0.25);
   border-radius: 10%;
   width: 25%;
@@ -15,6 +16,8 @@ const MovieItemWrapper = styled.div`
   height: 550px;
   cursor: pointer;
   transition: all 0.7s;
+  text-decoration: none;
+  color: black;
   &:hover {
     transform: scale(${({ showSearch }) => (showSearch ? 1 : 1.1)});
   }
@@ -52,7 +55,7 @@ const MovieItemDate = styled.p`
 
 const MovieItem = ({ movie, showSearch }) => {
   return (
-    <MovieItemWrapper showSearch={showSearch}>
+    <MovieItemWrapper showSearch={showSearch} to={`/movie/${movie.id}`}>
       <MovieItemImageWrapper>
         <MovieItemImage
           src={`${process.env.REACT_APP_SECURE_FILM_URL}/${movie.poster_path}`}
