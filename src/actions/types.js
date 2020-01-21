@@ -11,4 +11,5 @@ export const SHOW_SEARCH = "SHOW_SEARCH";
 
 export const SEARCH_MOVIES = "SEARCH_MOVIES";
 
-export const GET_MOVIE_BY_ID = 'GET_MOVIE_BY_ID';
+export const GET_MOVIE_BY_ID = "GET_MOVIE_BY_ID";
+export const GET_CAST = "GET_CAST";
