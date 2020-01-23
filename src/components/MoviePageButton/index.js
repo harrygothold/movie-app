@@ -9,6 +9,9 @@ const Button = styled.button`
   transition: all 0.3s;
   cursor: pointer;
   font-size: 18px;
+  @media (max-width: 767px) {
+    margin-top: 25px;
+  }
   svg {
     margin-left: 10px;
   }

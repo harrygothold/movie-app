@@ -7,7 +7,7 @@ import Rating from "../Rating";
 const MovieItemWrapper = styled(Link)`
   box-shadow: 0rem 2rem 5rem rgba(0, 0, 0, 0.25);
   border-radius: 10%;
-  width: 25%;
+  width: 360px;
   padding: 5px;
   display: flex;
   flex-direction: column;

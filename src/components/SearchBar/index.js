@@ -6,7 +6,6 @@ import { searchMovies, toggleSearch } from "../../actions";
 const SearchBarWrapper = styled.div`
   position: absolute;
   left: 35%;
-  /* top: 98px; */
   transform: translateY(
     ${({ showSearch }) => (showSearch ? "87px" : "-180px")}
   );
@@ -21,6 +20,9 @@ const SearchBarWrapper = styled.div`
   flex-direction: column;
   border-radius: 5px;
   z-index: 1;
+  @media (max-width: 699px) {
+    left: 0;
+  }
 `;
 
 const SearchInput = styled.input`

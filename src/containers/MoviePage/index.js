@@ -19,6 +19,9 @@ const MovieDetailsContainer = styled.div`
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-evenly;
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const MovieTitle = styled.h2`
@@ -26,21 +29,23 @@ const MovieTitle = styled.h2`
 `;
 
 const MovieImageContainer = styled.div`
-  width: 500px;
+  width: 400px;
   height: 450px;
 `;
 
 const MovieTextContainer = styled.div`
   width: 50%;
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 50px;
+    text-align: center;
+  }
 `;
 
 const MovieText = styled.p`
   margin: 20px;
   span {
     font-weight: bold;
-  }
-  svg {
-    margin-right: 15px;
   }
 `;
 
@@ -65,18 +70,30 @@ const MovieImage = styled.img`
   box-shadow: 0px 0px 12px 3px rgba(184, 180, 184, 1);
 `;
 
-const GenreContainer = styled.div`
+const GenreItem = styled.div`
+  svg {
+    margin-right: 15px;
+  }
+`;
+
+const GenreContainer = styled.ul`
   display: flex;
+  list-style: none;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   border: 1px solid black;
-  width: 450px;
-  height: 50px;
+  width: 70%;
+  height: auto;
+  padding: 20px;
   align-items: center;
   margin-bottom: 30px;
   margin-left: 20px;
   background: #1c2833;
   color: white;
+  @media (max-width: 767px) {
+    margin: 0 auto;
+  }
 `;
 
 const MoviePage = ({ getMovieById, match, movie, getCast }) => {
@@ -107,10 +124,12 @@ const MoviePage = ({ getMovieById, match, movie, getCast }) => {
                 </MovieText>
                 <GenreContainer>
                   {movie.genres.map(genre => (
-                    <MovieText key={genre.id}>
-                      <FontAwesomeIcon icon={faFilm} />
-                      {genre.name}
-                    </MovieText>
+                    <li>
+                      <GenreItem key={genre.id}>
+                        <FontAwesomeIcon icon={faFilm} />
+                        {genre.name}
+                      </GenreItem>
+                    </li>
                   ))}
                 </GenreContainer>
                 <SeeMoreLink href={movie.homepage} target="_blank">
