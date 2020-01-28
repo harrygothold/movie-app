@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import Helmet from "react-helmet";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { getMovieById, getCast } from "../../actions";
+import { getMovieById, getCast, addToFavourites } from "../../actions";
 import MoviePageButton from "../../components/MoviePageButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilm, faLink } from "@fortawesome/free-solid-svg-icons";
+import { faFilm, faLink, faHeart } from "@fortawesome/free-solid-svg-icons";
 import Cast from "../Cast";
 
 const MoviePageContainer = styled.div`
@@ -96,7 +96,13 @@ const GenreContainer = styled.ul`
   }
 `;
 
-const MoviePage = ({ getMovieById, match, movie, getCast }) => {
+const MoviePage = ({
+  getMovieById,
+  match,
+  movie,
+  getCast,
+  addToFavourites
+}) => {
   useEffect(() => {
     const getMovie = async () => {
       await getMovieById(match.params.id);
@@ -124,8 +130,8 @@ const MoviePage = ({ getMovieById, match, movie, getCast }) => {
                 </MovieText>
                 <GenreContainer>
                   {movie.genres.map(genre => (
-                    <li>
-                      <GenreItem key={genre.id}>
+                    <li key={genre.id}>
+                      <GenreItem>
                         <FontAwesomeIcon icon={faFilm} />
                         {genre.name}
                       </GenreItem>
@@ -138,6 +144,12 @@ const MoviePage = ({ getMovieById, match, movie, getCast }) => {
                     <FontAwesomeIcon icon={faLink} />
                   </MoviePageButton>
                 </SeeMoreLink>
+                <MoviePageButton
+                  onClick={() => addToFavourites(movie, "Favourite Added!")}
+                >
+                  Add To Favourites
+                  <FontAwesomeIcon icon={faHeart} />
+                </MoviePageButton>
               </MovieTextContainer>
               <MovieImageContainer>
                 <MovieImage
@@ -159,4 +171,8 @@ const mapStateToProps = state => ({
   movie: state.movie.movie
 });
 
-export default connect(mapStateToProps, { getMovieById, getCast })(MoviePage);
+export default connect(mapStateToProps, {
+  getMovieById,
+  getCast,
+  addToFavourites
+})(MoviePage);

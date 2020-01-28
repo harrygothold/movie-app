@@ -13,3 +13,10 @@ export const SEARCH_MOVIES = "SEARCH_MOVIES";
 
 export const GET_MOVIE_BY_ID = "GET_MOVIE_BY_ID";
 export const GET_CAST = "GET_CAST";
+
+export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
+
+export const SHOW_TOASTER = "SHOW_TOASTER";
+export const REMOVE_TOASTER = "REMOVE_TOASTER";
+
+export const GET_FAVOURITES = "GET_FAVOURITES";

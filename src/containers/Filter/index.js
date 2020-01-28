@@ -3,7 +3,7 @@ import FilterButton from "../../components/FilterButton";
 import styled from "styled-components";
 import FilterTab from "../../components/FilterTab";
 import { connect } from "react-redux";
-import { filterMovies, sortAZ, sortZA } from "../../actions/";
+import { filterMovies, sortAZ, sortZA, getFavourites } from "../../actions/";
 
 const FilterContainer = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const FilterListContainer = styled.div`
   overflow-y: scroll;
 `;
 
-const Filter = ({ genres, filterMovies, sortAZ, sortZA }) => {
+const Filter = ({ genres, filterMovies, sortAZ, sortZA, getFavourites }) => {
   const [filterToggle, setFilterToggle] = useState(false);
   const [openFilters, setOpenFilters] = useState(false);
   const [openSort, setOpenSort] = useState(false);
@@ -99,6 +99,9 @@ const Filter = ({ genres, filterMovies, sortAZ, sortZA }) => {
                 <FilterListItem onClick={() => handleZAClick()}>
                   Sort Z-A
                 </FilterListItem>
+                <FilterListItem onClick={() => getFavourites()}>
+                  Favourites
+                </FilterListItem>
               </ul>
             </FilterListContainer>
           )}
@@ -108,4 +111,6 @@ const Filter = ({ genres, filterMovies, sortAZ, sortZA }) => {
   );
 };
 
-export default connect(null, { filterMovies, sortAZ, sortZA })(Filter);
+export default connect(null, { filterMovies, sortAZ, sortZA, getFavourites })(
+  Filter
+);

@@ -5,10 +5,10 @@ const Button = styled.button`
   border: 1px solid black;
   background: white;
   padding: 10px 10px;
-  width: 150px;
   transition: all 0.3s;
   cursor: pointer;
   font-size: 18px;
+  margin: 10px;
   @media (max-width: 767px) {
     margin-top: 25px;
   }
@@ -22,6 +22,8 @@ const Button = styled.button`
   }
 `;
 
-const MoviePageButton = ({ children }) => <Button>{children}</Button>;
+const MoviePageButton = ({ children, ...props }) => (
+  <Button {...props}>{children}</Button>
+);
 
 export default MoviePageButton;

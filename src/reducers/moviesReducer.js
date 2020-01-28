@@ -7,7 +7,10 @@ const INITIAL_STATE = {
   genres: [],
   selectedFilter: [],
   allMovies: [],
-  showSearch: false
+  showSearch: false,
+  favourites: [],
+  showToaster: false,
+  message: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -93,6 +96,28 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         movies: action.payload
+      };
+    case TYPES.GET_FAVOURITES:
+      return {
+        ...state,
+        movies: state.favourites
+      };
+    case TYPES.ADD_TO_FAVOURITES:
+      return {
+        ...state,
+        favourites: [...state.favourites, action.payload]
+      };
+    case TYPES.SHOW_TOASTER:
+      return {
+        ...state,
+        showToaster: true,
+        message: action.payload
+      };
+    case TYPES.REMOVE_TOASTER:
+      return {
+        ...state,
+        showToaster: false,
+        message: ""
       };
     default: {
       return state;

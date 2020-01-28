@@ -103,3 +103,33 @@ export const getMovieById = id => async dispatch => {
     payload: res.data
   });
 };
+
+export const addToFavourites = (movie, message) => dispatch => {
+  dispatch({
+    type: Types.ADD_TO_FAVOURITES,
+    payload: movie
+  });
+  dispatch(showToaster(message));
+  setTimeout(() => {
+    dispatch(stopToaster());
+  }, 3000);
+};
+
+export const showToaster = message => dispatch => {
+  dispatch({
+    type: Types.SHOW_TOASTER,
+    payload: message
+  });
+};
+
+export const stopToaster = () => dispatch => {
+  dispatch({
+    type: Types.REMOVE_TOASTER
+  });
+};
+
+export const getFavourites = () => dispatch => {
+  dispatch({
+    type: Types.GET_FAVOURITES
+  });
+};
